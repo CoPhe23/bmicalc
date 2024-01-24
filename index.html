@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bmi calculator</title>
+    <style>
+        body {
+            background-color: #121212;
+            margin: 0;
+            font-family: Helvetica;
+        }
+
+        .container {
+            background-color: #1f1f1f;
+            margin: 0 auto;
+            max-width: 300px;
+            width: 100%;
+            height: 100vh;
+            max-height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 10%;
+            align-items: center;
+            border-radius: 20px;
+        }
+
+        input[type=number] {
+            width: calc(100% - 7px);
+            background-color: #333333;
+            padding-left: 5px;
+            border: 0;
+            height: calc(100% - 2px);
+            border-radius: 10px;
+            color: white;
+        }
+
+        input[type=button] {
+            width: 100%;
+            background: #1f1f1f;
+            height: 100%;
+            color: #40798C;
+            font-weight: bolder;
+            border-radius: 10px;
+            padding: 0;
+            border: 0;
+            transition: 1s;
+        }
+
+        input[type=button]#c {
+            color: red;
+        }
+
+        input[type=button]:hover {
+            color: white !important;
+            background: transparent;
+        }
+
+        .buttons {
+            display: flex;
+            width: 100%;
+            justify-content: space-evenly;
+        }
+
+        .text-border-wrap {
+            padding: 2px;
+            background: linear-gradient(90deg, #40798C, #9EC1A3);
+            width: 75%;
+            height: 10%;
+            border-radius: 10px;
+        }
+
+        .button-border-wrap {
+            padding: 2px;
+            background: linear-gradient(90deg, #40798C, #9EC1A3);
+            width: 35%;
+            height: 100%;
+            border-radius: 10px;
+        }
+
+        .buttonc-border-wrap {
+            padding: 2px;
+            background: linear-gradient(120deg, red 66%, rgba(255, 255, 0, 1) 100%);
+            width: 35%;
+            height: 100%;
+            border-radius: 10px;
+        }
+
+        h2 {
+            margin: 0;
+            color: white;
+        }
+
+        .result {
+            color: white;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Bmi Calculator</h2>
+        <div class="text-border-wrap"><input type="number" placeholder="Add meg a magasságod!" id="userh"></div>
+        <div class="text-border-wrap"><input type="number" placeholder="Add meg a súlyod!" name="" id="userw"></div>
+        <div class="buttons">
+            <div class="button-border-wrap"><input type="button" value="Calculate" onclick="calculate()"></div>
+            <div class="buttonc-border-wrap"><input type="button" id="c" value="Clear" onclick="cclear()"></div>
+        </div>
+        <div class="result"></div>
+    </div>
+    <script>
+        const rules = [
+            { min: 0, max: 18.5, categ: 'Underweight', emoji: '💀' },
+            { min: 18.5, max: 24.9, categ: 'Normal', emoji: '😊' },
+            { min: 24.9, max: 29.5, categ: 'Overweight', emoji: '🫠' },
+            { min: 29.5, max: 34.5, categ: 'Obese', emoji: '😐' },
+            { min: 34.5, max: 100000000, categ: 'Extremly Obese', emoji: '🍔' }
+        ]
+        function calculate() {
+            let height = +document.getElementById('userh').value / 100
+            let weight = +document.getElementById('userw').value
+            console.log(height);
+            let bmi = (weight / (height * height))
+            let result = rules.find(obj => bmi > obj.min && bmi <= obj.max)
+            console.log(result);
+
+            document.querySelector('.result').innerHTML = "BMI: " + Math.round(bmi) + "<br>" + result.categ + result.emoji
+
+        }
+        function cclear() {
+            document.querySelector('.result').innerHTML = ""
+            document.getElementById('userh').value = ""
+            document.getElementById('userw').value = ""
+        }
+    </script>
+</body>
+
+</html>
