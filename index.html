@@ -103,8 +103,8 @@
 <body>
     <div class="container">
         <h2>Bmi Calculator</h2>
-        <div class="text-border-wrap"><input type="number" placeholder="Add meg a magasságod!" id="userh"></div>
-        <div class="text-border-wrap"><input type="number" placeholder="Add meg a súlyod!" name="" id="userw"></div>
+        <div class="text-border-wrap"><input type="number" placeholder="Add meg a magasságod!(cm)" id="userh"></div>
+        <div class="text-border-wrap"><input type="number" placeholder="Add meg a súlyod!(kg)" name="" id="userw"></div>
         <div class="buttons">
             <div class="button-border-wrap"><input type="button" value="Calculate" onclick="calculate()"></div>
             <div class="buttonc-border-wrap"><input type="button" id="c" value="Clear" onclick="cclear()"></div>
@@ -122,6 +122,7 @@
         function calculate() {
             let height = +document.getElementById('userh').value / 100
             let weight = +document.getElementById('userw').value
+            height == 0 ? height = Null : height
             console.log(height);
             let bmi = (weight / (height * height))
             let result = rules.find(obj => bmi > obj.min && bmi <= obj.max)
